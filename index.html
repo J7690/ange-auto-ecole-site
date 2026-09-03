@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ange Auto-École - Votre permis de conduire en toute simplicité. Formation professionnelle, instructors qualifiés et taux de réussite élevé. Contact: angeautoecole@gmail.com, 73934392, 66660538, WhatsApp: 69563072">
+    <title>Ange Auto-École - Permis de Conduire</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="assets/logo/LOGO_ANGE.png" alt="Ange Auto-École Logo" class="logo-img">
+                <h1>Ange Auto-École</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#tarifs">Tarifs</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="politique-confidentialite.html">Politique de Confidentialité</a></li>
+                <li><a href="suppression-compte.html">Suppression de Compte</a></li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Carrousel d'images -->
+        <section class="carousel-section">
+            <div class="carousel-container">
+                <div class="carousel-slide" id="carouselSlide">
+                    <!-- Les images seront chargées automatiquement depuis le dossier assets/images/ -->
+                </div>
+                <button class="carousel-btn prev-btn" onclick="moveSlide(-1)">&#10094;</button>
+                <button class="carousel-btn next-btn" onclick="moveSlide(1)">&#10095;</button>
+                <div class="carousel-dots" id="carouselDots">
+                    <!-- Les points seront générés automatiquement -->
+                </div>
+            </div>
+        </section>
+
+        <section class="hero">
+            <div class="hero-content">
+                <h2>Obtenez votre permis de conduire avec Ange Auto-École</h2>
+                <p>Formation professionnelle, instructors qualifiés et accompagnement personnalisé pour votre réussite</p>
+                <a href="#contact" class="cta-button">Prendre Rendez-vous</a>
+            </div>
+        </section>
+
+        <section id="services" class="services">
+            <h2>Nos Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="icon">🎓</div>
+                    <h3>Permis B</h3>
+                    <p>Formation complète pour l'obtention du permis de conduire catégorie B (voiture)</p>
+                </div>
+                <div class="service-card">
+                    <div class="icon">📚</div>
+                    <h3>Code de la Route</h3>
+                    <p>Préparation approfondie à l'examen du code de la route avec tests en ligne</p>
+                </div>
+                <div class="service-card">
+                    <div class="icon">🚗</div>
+                    <h3>Conduite Supervisée</h3>
+                    <p>Apprentissage de la conduite avec accompagnement personnalisé</p>
+                </div>
+                <div class="service-card">
+                    <div class="icon">📱</div>
+                    <h3>Application Mobile</h3>
+                    <p>Notre application pour réviser le code et suivre votre progression</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="tarifs" class="tarifs">
+            <h2>Nos Tarifs</h2>
+            <div class="tarifs-grid">
+                <div class="tarif-card">
+                    <h3>Forfait Découverte</h3>
+                    <p class="price">50€</p>
+                    <ul>
+                        <li>2 heures de conduite</li>
+                        <li>Évaluation de niveau</li>
+                        <li>Conseils personnalisés</li>
+                    </ul>
+                </div>
+                <div class="tarif-card featured">
+                    <h3>Forfait Complet</h3>
+                    <p class="price">1200€</p>
+                    <ul>
+                        <li>20 heures de conduite</li>
+                        <li>Formation code de la route</li>
+                        <li>Présentation aux examens</li>
+                        <li>Accompagnement complet</li>
+                    </ul>
+                </div>
+                <div class="tarif-card">
+                    <h3>Heures Supplémentaires</h3>
+                    <p class="price">45€/heure</p>
+                    <ul>
+                        <li>Leçon de conduite</li>
+                        <li>Véhicule inclus</li>
+                        <li>Instructeur qualifié</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="avantages" class="avantages">
+            <h2>Pourquoi Nous Choisir ?</h2>
+            <div class="avantages-grid">
+                <div class="avantage-item">
+                    <div class="icon">✅</div>
+                    <h3>Taux de Réussite Élevé</h3>
+                    <p>90% de réussite à l'examen</p>
+                </div>
+                <div class="avantage-item">
+                    <div class="icon">👨‍🏫</div>
+                    <h3>Instructeurs Qualifiés</h3>
+                    <p>Équipe professionnelle et expérimentée</p>
+                </div>
+                <div class="avantage-item">
+                    <div class="icon">🕐</div>
+                    <h3>Horaires Flexibles</h3>
+                    <p>Cours le soir et le week-end</p>
+                </div>
+                <div class="avantage-item">
+                    <div class="icon">🚘</div>
+                    <h3>Véhicules Modernes</h3>
+                    <p>Flotte de véhicules récents et sécurisés</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <h2>Contactez-Nous</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Informations</h3>
+                    <p>📍 Adresse: 123 Rue de la Conduite, 75000 Paris</p>
+                    <p>📞 Téléphone: 73934392 / 66660538</p>
+                    <p>📱 WhatsApp: 69563072</p>
+                    <p>📧 Email: angeautoecole@gmail.com</p>
+                    <p>🕐 Horaires: Lundi - Samedi, 9h - 19h</p>
+                </div>
+                <form class="contact-form">
+                    <input type="text" placeholder="Votre nom" required>
+                    <input type="email" placeholder="Votre email" required>
+                    <input type="tel" placeholder="Votre téléphone" required>
+                    <textarea placeholder="Votre message" rows="5" required></textarea>
+                    <button type="submit">Envoyer</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <img src="assets/logo/LOGO_ANGE.png" alt="Ange Auto-École Logo" class="footer-logo">
+                <h3>Ange Auto-École</h3>
+                <p>Votre partenaire pour l'obtention du permis de conduire</p>
+                <p>📞 73934392 / 66660538</p>
+                <p>📱 WhatsApp: 69563072</p>
+                <p>📧 angeautoecole@gmail.com</p>
+            </div>
+            <div class="footer-section">
+                <h3>Liens Utiles</h3>
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="politique-confidentialite.html">Politique de Confidentialité</a></li>
+                    <li><a href="suppression-compte.html">Suppression de Compte</a></li>
+                    <li><a href="conditions-utilisation.html">Conditions d'Utilisation</a></li>
+                    <li><a href="mentions-legales.html">Mentions Légales</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Légal</h3>
+                <ul>
+                    <li><a href="politique-confidentialite.html">Politique de Confidentialité</a></li>
+                    <li><a href="suppression-compte.html">Suppression de Compte</a></li>
+                    <li><a href="conditions-utilisation.html">Conditions Générales</a></li>
+                    <li><a href="mentions-legales.html">Mentions Légales</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Ange Auto-École. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
