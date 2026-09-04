@@ -3,7 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Ange Auto-École - Votre permis de conduire en toute simplicité. Formation professionnelle, instructors qualifiés et taux de réussite élevé. Contact: angeautoecole@gmail.com, 73934392, 66660538, WhatsApp: 69563072">
+    <meta name="description" content="Ange Auto-École - Votre permis de conduire en toute simplicité. Formation professionnelle, instructeurs qualifiés et taux de réussite élevé. Contact: angeautoecole@gmail.com, 73934392, 66660538, WhatsApp: 69563072">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Ange Auto-École - Permis de Conduire à Ouagadougou">
+    <meta property="og:description" content="Formation au code de la route et à la conduite pratique, toutes catégories A1, A, B1, B, C. Auto-école agréée par la DGTTM.">
+    <meta property="og:image" content="assets/images/Image6_ANGE.jpeg">
+    <meta name="theme-color" content="#0b5c2e">
+    <link rel="icon" type="image/png" href="assets/logo/LOGO_ANGE.png">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Ange Auto-École">
     <title>Ange Auto-École - Permis de Conduire</title>
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -17,7 +28,8 @@
             <ul class="nav-links">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="#services">Services</a></li>
-                <li><a href="#tarifs">Tarifs</a></li>
+                <li><a href="#categories">Catégories</a></li>
+                <li><a href="#galerie">Galerie</a></li>
                 <li><a href="#contact">Contact</a></li>
                 <li><a href="politique-confidentialite.html">Politique de Confidentialité</a></li>
                 <li><a href="suppression-compte.html">Suppression de Compte</a></li>
@@ -31,6 +43,14 @@
     </header>
 
     <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h2>Obtenez votre permis de conduire avec Ange Auto-École</h2>
+                <p>Formation professionnelle, instructeurs qualifiés et accompagnement personnalisé pour votre réussite</p>
+                <a href="#contact" class="cta-button">Prendre Rendez-vous</a>
+            </div>
+        </section>
+
         <!-- Carrousel d'images -->
         <section class="carousel-section">
             <div class="carousel-container">
@@ -45,31 +65,23 @@
             </div>
         </section>
 
-        <section class="hero">
-            <div class="hero-content">
-                <h2>Obtenez votre permis de conduire avec Ange Auto-École</h2>
-                <p>Formation professionnelle, instructors qualifiés et accompagnement personnalisé pour votre réussite</p>
-                <a href="#contact" class="cta-button">Prendre Rendez-vous</a>
-            </div>
-        </section>
-
         <section id="services" class="services">
-            <h2>Nos Services</h2>
+            <h2>Nos Offres de Formation</h2>
             <div class="services-grid">
                 <div class="service-card">
                     <div class="icon">🎓</div>
-                    <h3>Permis B</h3>
-                    <p>Formation complète pour l'obtention du permis de conduire catégorie B (voiture)</p>
+                    <h3>Formation Complète</h3>
+                    <p>Formation théorique et pratique pour l'obtention de votre permis de conduire</p>
                 </div>
                 <div class="service-card">
                     <div class="icon">📚</div>
                     <h3>Code de la Route</h3>
-                    <p>Préparation approfondie à l'examen du code de la route avec tests en ligne</p>
+                    <p>Préparation approfondie à l'examen du code de la route selon la réglementation burkinabè</p>
                 </div>
                 <div class="service-card">
                     <div class="icon">🚗</div>
-                    <h3>Conduite Supervisée</h3>
-                    <p>Apprentissage de la conduite avec accompagnement personnalisé</p>
+                    <h3>Conduite Pratique</h3>
+                    <p>Heures de conduite avec instructeurs qualifiés et véhicules adaptés</p>
                 </div>
                 <div class="service-card">
                     <div class="icon">📱</div>
@@ -79,62 +91,81 @@
             </div>
         </section>
 
-        <section id="tarifs" class="tarifs">
-            <h2>Nos Tarifs</h2>
-            <div class="tarifs-grid">
-                <div class="tarif-card">
-                    <h3>Forfait Découverte</h3>
-                    <p class="price">50€</p>
-                    <ul>
-                        <li>2 heures de conduite</li>
-                        <li>Évaluation de niveau</li>
-                        <li>Conseils personnalisés</li>
-                    </ul>
+        <section id="categories" class="categories">
+            <h2>Nos Catégories de Permis</h2>
+            <p>Découvrez les différentes catégories de permis de conduire que nous proposons au Burkina Faso</p>
+            <div class="categories-grid">
+                <div class="category-card">
+                    <div class="icon">🏍️</div>
+                    <h3>Permis A1</h3>
+                    <p><strong>Âge minimum :</strong> 14 ans</p>
+                    <p><strong>Véhicules :</strong> Vélomoteurs et cyclomoteurs (≤125 cm³, ≤11 kW)</p>
+                    <p><strong>Description :</strong> Motocycles légers avec ou sans side-car</p>
                 </div>
-                <div class="tarif-card featured">
-                    <h3>Forfait Complet</h3>
-                    <p class="price">1200€</p>
-                    <ul>
-                        <li>20 heures de conduite</li>
-                        <li>Formation code de la route</li>
-                        <li>Présentation aux examens</li>
-                        <li>Accompagnement complet</li>
-                    </ul>
+                <div class="category-card">
+                    <div class="icon">🏍️</div>
+                    <h3>Permis A</h3>
+                    <p><strong>Âge minimum :</strong> 16 ans</p>
+                    <p><strong>Véhicules :</strong> Motocycles (>125 cm³)</p>
+                    <p><strong>Description :</strong> Motocycles avec ou sans side-car</p>
                 </div>
-                <div class="tarif-card">
-                    <h3>Heures Supplémentaires</h3>
-                    <p class="price">45€/heure</p>
-                    <ul>
-                        <li>Leçon de conduite</li>
-                        <li>Véhicule inclus</li>
-                        <li>Instructeur qualifié</li>
-                    </ul>
+                <div class="category-card featured">
+                    <div class="icon">🚗</div>
+                    <h3>Permis B</h3>
+                    <p><strong>Âge minimum :</strong> 18 ans</p>
+                    <p><strong>Véhicules :</strong> Automobiles (PTAC ≤3500 kg, ≤8 places)</p>
+                    <p><strong>Description :</strong> Voitures particulières et véhicules légers</p>
+                </div>
+                <div class="category-card">
+                    <div class="icon">🛵</div>
+                    <h3>Permis B1</h3>
+                    <p><strong>Âge minimum :</strong> 16 ans</p>
+                    <p><strong>Véhicules :</strong> Tricycles et quadricycles à moteur</p>
+                    <p><strong>Description :</strong> Véhicules à trois ou quatre roues</p>
+                </div>
+                <div class="category-card">
+                    <div class="icon">🚚</div>
+                    <h3>Permis C</h3>
+                    <p><strong>Âge minimum :</strong> 18 ans</p>
+                    <p><strong>Véhicules :</strong> Transport de marchandises (PTAC >3500 kg)</p>
+                    <p><strong>Description :</strong> Camions et véhicules utilitaires</p>
                 </div>
             </div>
         </section>
 
+        <section id="galerie" class="gallery">
+            <h2>Notre Auto-École en Images</h2>
+            <p>Notre local et notre flotte de motos à Ouagadougou</p>
+            <div class="gallery-grid">
+                <img src="assets/images/Image3_ANGE.jpeg" alt="Façade d'Ange Auto-École de nuit, avec le camion et les motos-écoles" loading="lazy">
+                <img src="assets/images/Image4_ANGE.jpeg" alt="Flotte de motos-écoles garées devant Ange Auto-École" loading="lazy">
+                <img src="assets/images/Image5_ANGE.jpeg" alt="Camion-école et façade d'Ange Auto-École de jour" loading="lazy">
+                <img src="assets/images/Image6_ANGE.jpeg" alt="Ange Auto-École de nuit, enseigne éclairée" loading="lazy">
+            </div>
+        </section>
+
         <section id="avantages" class="avantages">
-            <h2>Pourquoi Nous Choisir ?</h2>
+            <h2>Pourquoi Choisir Ange Auto-École ?</h2>
             <div class="avantages-grid">
                 <div class="avantage-item">
                     <div class="icon">✅</div>
-                    <h3>Taux de Réussite Élevé</h3>
-                    <p>90% de réussite à l'examen</p>
+                    <h3>Agrée par la DGTTM</h3>
+                    <p>Auto-école officiellement agréée au Burkina Faso</p>
                 </div>
                 <div class="avantage-item">
                     <div class="icon">👨‍🏫</div>
-                    <h3>Instructeurs Qualifiés</h3>
+                    <h3>Instructeurs Certifiés</h3>
                     <p>Équipe professionnelle et expérimentée</p>
                 </div>
                 <div class="avantage-item">
-                    <div class="icon">🕐</div>
-                    <h3>Horaires Flexibles</h3>
-                    <p>Cours le soir et le week-end</p>
+                    <div class="icon">🏍️</div>
+                    <h3>Toutes Catégories</h3>
+                    <p>Formation A1, A, B1, B, C selon vos besoins</p>
                 </div>
                 <div class="avantage-item">
-                    <div class="icon">🚘</div>
-                    <h3>Véhicules Modernes</h3>
-                    <p>Flotte de véhicules récents et sécurisés</p>
+                    <div class="icon">⏰</div>
+                    <h3>Horaires Flexibles</h3>
+                    <p>Cours le soir et le week-end pour votre convenance</p>
                 </div>
             </div>
         </section>
@@ -144,7 +175,7 @@
             <div class="contact-container">
                 <div class="contact-info">
                     <h3>Informations</h3>
-                    <p>📍 Adresse: 123 Rue de la Conduite, Ouagadougou</p>
+                    <p>📍 Adresse: Tanghin, Ouagadougou</p>
                     <p>📞 Téléphone: 73934392 / 66660538</p>
                     <p>📱 WhatsApp: 69563072</p>
                     <p>📧 Email: angeautoecole@gmail.com</p>
@@ -192,7 +223,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2024 Ange Auto-École. Tous droits réservés.</p>
+            <p>&copy; 2026 Ange Auto-École. Tous droits réservés.</p>
         </div>
     </footer>
 

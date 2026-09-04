@@ -29,12 +29,15 @@ Placez ici les icônes personnalisées (optionnel).
 
 ## Nom des fichiers attendus
 
-Pour le carrousel (au moins 3 images recommandées) :
+Pour le carrousel (au moins 3 images recommandées, jusqu'à 8 supportées) :
 - assets/images/Image1_ANGE.jpeg
-- assets/images/Image2_ANGE.jpeg  
-- assets/images/Image3_ANGE.jpeg (optionnel)
-- assets/images/Image4_ANGE.jpeg (optionnel)
-- assets/images/Image5_ANGE.jpeg (optionnel)
+- assets/images/Image2_ANGE.jpeg
+- assets/images/Image3_ANGE.jpeg
+- assets/images/Image4_ANGE.jpeg
+- assets/images/Image5_ANGE.jpeg
+- assets/images/Image6_ANGE.jpeg
+- assets/images/Image7_ANGE.jpeg (optionnel)
+- assets/images/Image8_ANGE.jpeg (optionnel)
 
 Format alternatif supporté :
 - assets/images/image1.jpg

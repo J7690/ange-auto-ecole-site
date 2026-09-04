@@ -1,42 +1,42 @@
 @echo off
+setlocal
+cd /d "%~dp0"
+
 echo ========================================
-echo Script pour pousser sur GitHub
+echo Publication du site Ange Auto-Ecole sur GitHub
 echo ========================================
 echo.
-echo IMPORTANT: Vous devez d'abord creer un depot sur GitHub
-echo Allez sur https://github.com et creez un nouveau depot
-echo.
-set /p USERNAME="Entrez votre nom d'utilisateur GitHub: "
-set REPO_NAME=ange-auto-ecole-site
 
-echo.
-echo Vous avez entre: %USERNAME%
-echo.
-echo Verification du depot distant existant...
+echo Depot distant configure :
 git remote -v
-
 echo.
-echo Ajout du depot distant...
-git remote add origin https://github.com/%USERNAME%/%REPO_NAME%.git
 
-echo.
-echo Verification du depot distant:
-git remote -v
-
-echo.
-echo Poussage du code sur GitHub...
-git push -u origin master
-
-if %errorlevel% neq 0 (
+echo Enregistrement des changements dans Git (git add + commit)...
+git add -A
+git commit -m "Mise a jour du site - %date% %time%"
+if errorlevel 1 (
     echo.
-    echo Erreur avec 'master'. Essai avec 'main'...
+    echo Aucun changement a enregistrer, ou une erreur est survenue ci-dessus.
+    echo Si c'est juste "nothing to commit", ce n'est pas grave, on continue.
+)
+
+echo.
+echo Envoi vers GitHub...
+echo (une fenetre de connexion GitHub peut s'ouvrir dans votre navigateur : connectez-vous et autorisez)
+echo.
+git push origin master
+if errorlevel 1 (
+    echo.
+    echo Le push avec 'master' a echoue. Nouvel essai avec 'main'...
     git branch -M main
     git push -u origin main
 )
 
 echo.
 echo ========================================
-echo Termine ! Verifiez votre depot sur GitHub
+echo Termine. Verifiez le resultat juste au-dessus :
+echo   - "main/master -> main/master" = ca a marche
+echo   - un message d'erreur = faites une capture d'ecran de cette fenetre
 echo ========================================
 echo.
 pause

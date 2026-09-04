@@ -1,3 +1,12 @@
+// Enregistrement du Service Worker (mode application / PWA)
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(() => {
+            // échec silencieux : le site continue de fonctionner normalement sans mode hors-ligne
+        });
+    });
+}
+
 // Mobile Navigation Toggle
 const burger = document.querySelector('.burger');
 const nav = document.querySelector('.nav-links');
@@ -80,8 +89,8 @@ document.querySelectorAll('.service-card').forEach(card => {
     observer.observe(card);
 });
 
-// Observe tarif cards
-document.querySelectorAll('.tarif-card').forEach(card => {
+// Observe category cards
+document.querySelectorAll('.category-card').forEach(card => {
     card.style.opacity = '0';
     card.style.transform = 'translateY(20px)';
     card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
@@ -229,6 +238,9 @@ function loadCarouselImages() {
         'assets/images/Image3_ANGE.jpeg',
         'assets/images/Image4_ANGE.jpeg',
         'assets/images/Image5_ANGE.jpeg',
+        'assets/images/Image6_ANGE.jpeg',
+        'assets/images/Image7_ANGE.jpeg',
+        'assets/images/Image8_ANGE.jpeg',
         'assets/images/image1.jpg',
         'assets/images/image2.jpg',
         'assets/images/image3.jpg',
