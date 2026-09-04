@@ -1,10 +1,11 @@
 // Service worker - Ange Auto-École
 // Met le site en cache pour un chargement rapide et un usage hors-ligne basique (app shell).
 
-const CACHE_NAME = 'ange-auto-ecole-v1';
+const CACHE_NAME = 'ange-auto-ecole-v2';
 const APP_SHELL = [
     '/',
     '/index.html',
+    '/merci.html',
     '/styles.css',
     '/script.js',
     '/manifest.json',

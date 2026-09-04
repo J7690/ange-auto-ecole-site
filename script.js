@@ -34,25 +34,17 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Contact form handling
+// Formulaire de pre-inscription : retour visuel pendant l'envoi.
+// L'envoi lui-meme est traite par Netlify Forms (attribut data-netlify),
+// puis le visiteur est redirige vers merci.html.
 const contactForm = document.querySelector('.contact-form');
 if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Get form data
-        const formData = new FormData(this);
-        const name = this.querySelector('input[type="text"]').value;
-        const email = this.querySelector('input[type="email"]').value;
-        const phone = this.querySelector('input[type="tel"]').value;
-        const message = this.querySelector('textarea').value;
-        
-        // Here you would typically send the data to a server
-        // For now, we'll just show an alert
-        alert('Merci pour votre message ! Nous vous contacterons bientôt.');
-        
-        // Reset form
-        this.reset();
+    contactForm.addEventListener('submit', function () {
+        const bouton = this.querySelector('button[type="submit"]');
+        if (bouton) {
+            bouton.disabled = true;
+            bouton.textContent = 'Envoi en cours...';
+        }
     });
 }
 
