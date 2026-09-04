@@ -1,3 +1,16 @@
+:root {
+    --brand-green: #006400;
+    --brand-green-dark: #004d00;
+    --brand-red: #e00d10;
+    --brand-red-dark: #b80a0d;
+    --text-dark: #23292c;
+    --text-muted: #5a6268;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+    --shadow-soft: 0 4px 16px rgba(0,0,0,0.08);
+    --shadow-hover: 0 10px 28px rgba(0,0,0,0.16);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -5,10 +18,33 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6;
-    color: #333;
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.65;
+    color: var(--text-dark);
     background-color: #f4f4f4;
+}
+
+h1, h2, h3, .cta-button, .logo h1 {
+    font-family: 'Poppins', 'Segoe UI', sans-serif;
+}
+
+section h2 {
+    font-size: 2rem;
+    position: relative;
+}
+
+section#services h2::after,
+section#categories h2::after,
+section#galerie h2::after,
+section#avantages h2::after,
+section#contact h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: var(--brand-red);
+    border-radius: 2px;
+    margin: 0.8rem auto 0;
 }
 
 /* Navigation */
@@ -67,8 +103,28 @@ body {
     transition: color 0.3s;
 }
 
+.nav-links a {
+    position: relative;
+    padding-bottom: 4px;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background: var(--brand-red);
+    transition: width 0.3s ease;
+}
+
 .nav-links a:hover {
-    color: #e91e63;
+    color: #ffffff;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
 }
 
 .burger {
@@ -116,17 +172,21 @@ body {
 
 .cta-button {
     display: inline-block;
-    background-color: #e91e63;
+    background-color: var(--brand-red);
     color: white;
-    padding: 1rem 2rem;
+    padding: 1rem 2.4rem;
     text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-    font-weight: bold;
+    border-radius: 50px;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    box-shadow: 0 6px 20px rgba(224, 13, 16, 0.35);
 }
 
 .cta-button:hover {
-    background-color: #c2185b;
+    background-color: var(--brand-red-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 26px rgba(224, 13, 16, 0.45);
 }
 
 /* Carousel Styles */
@@ -269,6 +329,66 @@ body {
     box-shadow: 0 8px 20px rgba(0,0,0,0.25);
 }
 
+/* Bouton flottant WhatsApp */
+.whatsapp-float {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 60px;
+    height: 60px;
+    background-color: #25D366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    z-index: 999;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.08);
+    box-shadow: 0 10px 26px rgba(0,0,0,0.3);
+}
+
+.whatsapp-float svg {
+    width: 32px;
+    height: 32px;
+}
+
+/* Carte de localisation */
+.map-embed {
+    margin-top: 2rem;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+    border: 1px solid #eef0f1;
+}
+
+.map-embed iframe {
+    width: 100%;
+    height: 260px;
+    border: 0;
+    display: block;
+}
+
+.map-cta {
+    display: block;
+    padding: 0.9rem 1rem;
+    text-align: center;
+    background: #fff;
+    color: var(--brand-red);
+    font-weight: 600;
+    text-decoration: none;
+    border-top: 1px solid #eef0f1;
+    transition: background 0.25s ease, color 0.25s ease;
+}
+
+.map-cta:hover {
+    background: var(--brand-red);
+    color: #fff;
+}
+
 /* Footer Logo */
 .footer-logo {
     width: 80px;
@@ -301,16 +421,18 @@ body {
 }
 
 .service-card {
-    background-color: #f8f9fa;
-    padding: 2rem;
-    border-radius: 10px;
+    background-color: #ffffff;
+    padding: 2.2rem 1.8rem;
+    border-radius: var(--radius-lg);
     text-align: center;
+    box-shadow: var(--shadow-soft);
+    border: 1px solid #eef0f1;
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .service-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-hover);
 }
 
 .service-card .icon {
@@ -321,6 +443,41 @@ body {
 .service-card h3 {
     color: #006400;
     margin-bottom: 1rem;
+}
+
+/* Carte cliquable vers l'application mobile */
+a.service-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.service-card--app {
+    background: linear-gradient(160deg, #ffffff 0%, #fdf3f3 100%);
+    border-color: rgba(224, 13, 16, 0.25);
+    position: relative;
+}
+
+.service-card--app:hover {
+    border-color: var(--brand-red);
+    box-shadow: 0 14px 32px rgba(224, 13, 16, 0.18);
+}
+
+.service-card__cta {
+    display: inline-block;
+    margin-top: 1.2rem;
+    padding: 0.6rem 1.4rem;
+    background-color: var(--brand-red);
+    color: #ffffff;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: background-color 0.25s ease, transform 0.25s ease;
+}
+
+.service-card--app:hover .service-card__cta {
+    background-color: var(--brand-red-dark);
+    transform: translateX(3px);
 }
 
 /* Categories Section */
@@ -349,20 +506,27 @@ body {
 
 .category-card {
     background-color: white;
-    padding: 2rem;
-    border-radius: 10px;
+    padding: 2.2rem 1.8rem;
+    border-radius: var(--radius-lg);
     text-align: center;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-    transition: transform 0.3s;
+    box-shadow: var(--shadow-soft);
+    border: 1px solid #eef0f1;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .category-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-hover);
 }
 
 .category-card.featured {
-    border: 3px solid #006400;
+    border: 2px solid var(--brand-red);
     transform: scale(1.05);
+    box-shadow: 0 8px 24px rgba(224, 13, 16, 0.18);
+}
+
+.category-card.featured:hover {
+    transform: scale(1.05) translateY(-6px);
 }
 
 .category-card .icon {
@@ -507,7 +671,7 @@ footer {
 }
 
 .footer-section a:hover {
-    color: #e91e63;
+    color: var(--brand-red);
 }
 
 .footer-bottom {
@@ -564,6 +728,18 @@ footer {
     .hero-content h2 {
         font-size: 1.8rem;
     }
+
+    .whatsapp-float {
+        width: 52px;
+        height: 52px;
+        bottom: 16px;
+        right: 16px;
+    }
+
+    .whatsapp-float svg {
+        width: 28px;
+        height: 28px;
+    }
 }
 
 /* Legal Pages Styles */
@@ -603,7 +779,7 @@ footer {
 }
 
 .legal-page a {
-    color: #e91e63;
+    color: var(--brand-red);
     text-decoration: none;
 }
 

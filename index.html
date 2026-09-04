@@ -16,7 +16,34 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Ange Auto-École">
     <title>Ange Auto-École - Permis de Conduire</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Ange Auto-École",
+        "image": "assets/logo/LOGO_ANGE.png",
+        "telephone": ["+22673934392", "+22666660538"],
+        "email": "angeautoecole@gmail.com",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Tanghin, Ouagadougou",
+            "addressCountry": "BF"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 12.4052614,
+            "longitude": -1.5313842
+        },
+        "hasMap": "https://maps.google.com/?cid=18433097318512551533",
+        "areaServed": "Ouagadougou",
+        "openingHours": "Mo-Sa 09:00-19:00",
+        "description": "Auto-école agréée par la DGTTM à Ouagadougou. Formation au code de la route et à la conduite pratique, catégories A1, A, B1, B, C."
+    }
+    </script>
 </head>
 <body>
     <header>
@@ -180,6 +207,10 @@
                     <p>📱 WhatsApp: 69563072</p>
                     <p>📧 Email: angeautoecole@gmail.com</p>
                     <p>🕐 Horaires: Lundi - Samedi, 9h - 19h</p>
+                    <div class="map-embed">
+                        <iframe src="https://maps.google.com/maps?q=12.4052614,-1.5313842&hl=fr&z=17&output=embed" loading="lazy" title="Localisation d'Ange Auto-École, Tanghin, Ouagadougou" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <a class="map-cta" href="https://maps.google.com/?cid=18433097318512551533" target="_blank" rel="noopener">📍 Ouvrir dans Google Maps &amp; obtenir l'itinéraire</a>
+                    </div>
                 </div>
                 <form class="contact-form">
                     <input type="text" placeholder="Votre nom" required>
@@ -226,6 +257,13 @@
             <p>&copy; 2026 Ange Auto-École. Tous droits réservés.</p>
         </div>
     </footer>
+
+    <a href="https://wa.me/22669563072" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Contactez-nous sur WhatsApp">
+        <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.472-.148-.67.15-.198.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            <path d="M12.001 2C6.478 2 2 6.477 2 12c0 1.86.505 3.63 1.457 5.166L2 22l4.955-1.428A9.94 9.94 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18.09c-1.639 0-3.24-.44-4.634-1.271l-.331-.196-3.037.876.9-3.033-.216-.34A8.075 8.075 0 0 1 3.91 12c0-4.466 3.622-8.09 8.09-8.09 4.466 0 8.09 3.624 8.09 8.09 0 4.466-3.624 8.09-8.09 8.09z"/>
+        </svg>
+    </a>
 
     <script src="script.js"></script>
 </body>
