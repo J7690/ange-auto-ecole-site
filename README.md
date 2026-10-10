@@ -1,141 +1,63 @@
-# Site Web Ange Auto-École
+# Site web Ange Auto-École
 
-Site web complet pour Ange Auto-École, conçu pour répondre à toutes les exigences du Google Play Store en matière de documentation légale.
+Site vitrine de l'auto-école, en ligne sur <https://www.angeautoecole.com>
+(Netlify). L'application des candidats est un projet distinct, publiée sur
+<https://app.angeautoecole.com> et sur Google Play (`com.angeautoecole.app`).
 
-## Structure du projet
+Site statique, sans dépendance ni étape de construction : HTML, CSS et
+JavaScript écrits à la main, pour rester léger sur les réseaux lents.
+
+## Fichiers
 
 ```
-SITE WEB ANGE AUTO ECOLE/
-├── index.html                      # Page d'accueil principale
-├── styles.css                      # Feuille de style principale
-├── script.js                       # JavaScript pour l'interactivité
-├── politique-confidentialite.html  # Politique de confidentialité (exigence Play Store)
-├── suppression-compte.html         # Page de suppression de compte (exigence Play Store)
-├── conditions-utilisation.html     # Conditions générales d'utilisation
-├── mentions-legales.html           # Mentions légales
-└── README.md                       # Ce fichier
+index.html                      Page d'accueil (formations, catégories, parcours,
+                                application, galerie, questions, pré-inscription)
+merci.html                      Confirmation après le formulaire (non indexée)
+politique-confidentialite.html  Pages légales, exigées notamment par le Play Store
+suppression-compte.html
+conditions-utilisation.html
+mentions-legales.html
+styles.css                      Toute la mise en forme (clair et sombre)
+script.js                       Tous les comportements, sans bibliothèque
+sw.js                           Service worker (pages réseau d'abord, hors ligne de base)
+manifest.json                   Installation comme application
+netlify.toml                    En-têtes de sécurité et de cache
+robots.txt, sitemap.xml         Référencement
+assets/marque/                  Logo (WebP) et les trois calques de la roue ailée animée
+assets/photos/                  Photos de l'école en WebP, 800 et 1600 px de large
+assets/video/                   Vidéo d'accueil (WebM + MP4) et vidéo du terrain, avec leurs affiches
+assets/elena/                   Visages d'Elena utilisés dans le quiz d'essai
+assets/images/, assets/logo/    Fichiers d'origine (image de partage, logo du balisage)
 ```
 
-## Pages principales
+## Identité visuelle
 
-### 1. Page d'accueil (index.html)
-- Présentation de l'auto-école
-- Services proposés
-- Tarifs
-- Avantages
-- Formulaire de contact
-- Navigation vers toutes les pages légales
+Les couleurs, les polices (Bricolage Grotesque pour les titres, Andika pour le
+texte) et la roue ailée animée reprennent celles de l'application. Les
+animations de la roue (coup de volant puis battement d'ailes toutes les cinq
+secondes) suivent les mêmes trajectoires que l'écran de connexion de
+l'application (`ange_logo.dart`).
 
-### 2. Politique de confidentialité (politique-confidentialite.html)
-Conforme aux exigences du RGPD et du Play Store :
-- Données collectées
-- Utilisation des données
-- Partage des données
-- Conservation des données
-- Droits des utilisateurs
-- Sécurité des données
-- Cookies
-- Contact pour les questions
+## Règles à respecter
 
-### 3. Suppression de compte (suppression-compte.html)
-Conforme aux exigences du Play Store :
-- Procédures de demande de suppression
-- Délai de traitement (30 jours)
-- Données supprimées
-- Exceptions légales
-- Conséquences de la suppression
-- Vérification de l'identité
-- Exportation des données avant suppression
-- Contact et réclamation
+- **Réduire les animations** : tout mouvement s'arrête si le visiteur l'a
+  demandé dans les réglages de son appareil.
+- **Données** : la vidéo d'accueil n'est chargée que sur un écran d'au moins
+  768 px, hors économiseur de données et hors réseau 2G. Sur téléphone,
+  l'image fixe la remplace.
+- **Cache** : `styles.css` et `script.js` sont appelés avec `?v=N`. À chaque
+  mise en ligne qui les modifie, augmenter `N` dans toutes les pages, dans
+  `sw.js` (liste et `CACHE_NAME`).
+- **Formulaire** : la pré-inscription passe par Netlify Forms. Ne pas renommer
+  le formulaire (`pre-inscription`) ni ses champs, sinon Netlify ne range plus
+  les demandes au même endroit.
 
-### 4. Conditions d'utilisation (conditions-utilisation.html)
-- Acceptation des conditions
-- Description des services
-- Inscription et compte utilisateur
-- Règles de conduite
-- Tarifs et paiement
-- Propriété intellectuelle
-- Responsabilité
-- Protection des données
-- Résiliation
-
-### 5. Mentions légales (mentions-legales.html)
-- Éditeur du site
-- Hébergement
-- Propriété intellectuelle
-- Protection des données personnelles
-- Cookies
-- Liens hypertextes
-- Services proposés
-- Limitation de responsabilité
-- Litiges
-- CNIL
-
-## Fonctionnalités
-
-- Design responsive (mobile, tablette, desktop)
-- Navigation fluide avec menu burger sur mobile
-- Animations au scroll
-- Formulaire de contact interactif
-- Navigation cohérente entre toutes les pages
-- Liens vers toutes les pages légales depuis chaque page
-
-## Exigences Play Store satisfaites
-
-✅ Lien URL vers la politique de confidentialité
-✅ Lien URL vers la page de suppression de compte
-✅ Informations claires sur la collecte et l'utilisation des données
-✅ Procédure de suppression de compte accessible
-✅ Délai de traitement de suppression spécifié (30 jours)
-✅ Contact pour les questions de confidentialité
-✅ Mentions légales complètes
-✅ Conditions d'utilisation claires
-
-## Personnalisation
-
-Pour adapter ce site à votre auto-école :
-
-1. Remplacez les informations de contact dans tous les fichiers HTML
-2. Modifiez les tarifs dans index.html
-3. Adaptez les mentions légales avec vos informations réelles
-4. Personnalisez les couleurs dans styles.css
-5. Ajoutez votre logo dans le header
-
-## Installation locale
-
-1. Ouvrez simplement le fichier `index.html` dans votre navigateur
-2. Ou utilisez un serveur local (Live Server, Python http.server, etc.)
+## Essai en local
 
 ```bash
-# Avec Python
-python -m http.server 8000
-
-# Avec Node.js (si http-server est installé)
-npx http-server
+python -m http.server 8095
 ```
 
-## Déploiement
-
-Ce site peut être déployé sur :
-- Netlify (recommandé) - voir `DEPLOYMENT.md` pour les instructions détaillées
-- GitHub Pages
-- Vercel
-- Tout hébergeur web traditionnel
-
-### Déploiement rapide sur Netlify
-
-1. Allez sur [https://www.netlify.com](https://www.netlify.com)
-2. Créez un compte gratuit
-3. Faites glisser le dossier complet du projet dans la zone de déploiement
-4. Votre site sera en ligne en quelques secondes !
-
-## Contact
-
-Pour toute question sur ce site web :
-- Email: angeautoecole@gmail.com
-- Téléphone: 73934392 / 66660538
-- WhatsApp: 69563072
-
-## Licence
-
-© 2024 Ange Auto-École. Tous droits réservés.
+Puis ouvrir <http://localhost:8095>. Après une modification, si l'ancienne
+version reste affichée, désinscrire le service worker dans les outils du
+navigateur.
