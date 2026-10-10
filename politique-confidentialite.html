@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=3">
+    <link rel="stylesheet" href="styles.css?v=4">
     <script>document.documentElement.classList.add('js');</script>
 </head>
 <body class="page-simple">
@@ -21,7 +21,7 @@
     <header class="entete">
         <nav class="entete__barre" aria-label="Navigation principale">
             <a class="marque" href="index.html" aria-label="Ange Auto-École, accueil">
-                <img src="assets/marque/logo-96.webp" width="48" height="48" alt="" class="marque__logo">
+                <span class="marque__logo" aria-hidden="true"></span>
                 <span class="marque__nom">Ange <span>Auto-École</span></span>
             </a>
             <button class="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Ouvrir le menu">
@@ -148,8 +148,8 @@
     <footer class="pied">
         <div class="conteneur pied__grille">
             <div class="pied__marque">
-                <img src="assets/marque/logo-192.webp" width="72" height="72" alt="Logo Ange Auto-École" loading="lazy">
-                <p><strong>Ange Auto-École</strong><br>Auto-école agréée DGTTM à Tanghin, Ouagadougou.</p>
+                <span class="pied__logo" role="img" aria-label="Logo Ange Auto-École : la roue ailée"></span>
+                <p><strong>Ange Auto-École</strong><br>Agrément AE 203 · Tanghin, Ouagadougou.</p>
                 <p class="pied__contacts"><a href="tel:+22673934392">73 93 43 92</a> · <a href="tel:+22666660538">66 66 05 38</a><br><a href="mailto:angeautoecole@gmail.com">angeautoecole@gmail.com</a></p>
             </div>
             <div>
@@ -212,6 +212,6 @@
         <symbol id="i-horloge" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M12 6.5V12l3.5 2"/></symbol>
     </svg>
 
-<script src="script.js?v=3" defer></script>
+<script src="script.js?v=4" defer></script>
 </body>
 </html>

@@ -7,16 +7,15 @@
 // ci-dessous + CACHE_NAME) à chaque mise en ligne qui les modifie, sinon une
 // page neuve tournerait avec un style ancien.
 
-const CACHE_NAME = 'ange-auto-ecole-v3';
+const CACHE_NAME = 'ange-auto-ecole-v4';
 const APP_SHELL = [
     '/',
     '/index.html',
     '/merci.html',
-    '/styles.css?v=3',
-    '/script.js?v=3',
+    '/styles.css?v=4',
+    '/script.js?v=4',
     '/manifest.json',
-    '/assets/marque/logo-96.webp',
-    '/assets/marque/logo-192.webp',
+    '/assets/marque/roue-ailee-240.webp',
     '/assets/marque/embleme_volant.webp',
     '/assets/marque/embleme_aile_haut.webp',
     '/assets/marque/embleme_aile_bas.webp',
