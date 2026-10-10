@@ -26,7 +26,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&display=swap" rel="stylesheet">
     <link rel="preload" as="image" href="assets/video/accueil-camion.webp">
-    <link rel="stylesheet" href="styles.css?v=4">
+    <link rel="stylesheet" href="styles.css?v=5">
     <script>document.documentElement.classList.add('js');</script>
     <script type="application/ld+json">
     {
@@ -85,7 +85,7 @@
                 <li><a href="#formations">Formations</a></li>
                 <li><a href="#parcours">Parcours</a></li>
                 <li><a href="#application">Application</a></li>
-                <li><a href="#galerie">Galerie</a></li>
+                <li><a href="#test">Testez-vous</a></li>
                 <li><a href="#faq">Questions</a></li>
                 <li class="menu__cta"><a class="bouton bouton--or bouton--petit" href="#contact">Pré-inscription</a></li>
             </ul>
@@ -130,6 +130,7 @@
                         Écrire sur WhatsApp
                     </a>
                 </div>
+                <a class="hero__lien" href="#test">ou testez-vous en 5 questions <span aria-hidden="true">→</span></a>
             </div>
 
             <a class="hero__defiler" href="#formations" aria-label="Descendre vers les formations"><span></span></a>
@@ -155,8 +156,8 @@
                     <span>séries d'examen dans l'application</span>
                 </div>
                 <div class="chiffre reveal" style="--i:2">
-                    <strong data-compteur="437">437</strong>
-                    <span>questions d'entraînement corrigées</span>
+                    <strong data-compteur="440">440</strong>
+                    <span>questions corrigées et expliquées</span>
                 </div>
                 <div class="chiffre reveal" style="--i:3">
                     <strong>6<small>/7</small></strong>
@@ -355,7 +356,8 @@
 
                 <div class="telephone reveal" style="--i:2">
                     <div class="telephone__ecran">
-                        <div class="telephone__barre"><span>Révision</span><span class="pastille">Essayez</span></div>
+                        <div class="telephone__barre"><span>Révision</span><span class="pastille" data-pastille>Essayez</span></div>
+                        <div class="telephone__contenu" data-question-jour>
                         <p class="telephone__question">Que signifie ce panneau ?</p>
                         <svg class="panneau" viewBox="0 0 100 100" role="img" aria-label="Panneau rond rouge barré d'un trait blanc horizontal">
                             <circle cx="50" cy="50" r="48" fill="#fff"/>
@@ -371,6 +373,61 @@
                             <img src="assets/elena/elena-felicitations.webp" width="56" height="56" alt="">
                             <p aria-live="polite"></p>
                         </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ MINI-TEST ============ -->
+        <section id="test" class="section section--creme" aria-labelledby="test-titre">
+            <div class="conteneur conteneur--moyen">
+                <header class="section__entete reveal">
+                    <p class="surtitre">Testez-vous</p>
+                    <h2 id="test-titre">Auriez-vous le code aujourd'hui ?</h2>
+                    <p class="section__intro">5 questions tirées de nos séries d'examen, notées comme le jour de l'examen : une question à plusieurs réponses n'est juste que si toutes les bonnes cases sont cochées.</p>
+                </header>
+
+                <div class="test reveal" data-test>
+                    <div class="test__accueil" data-test-accueil>
+                        <ul class="test__faits">
+                            <li><strong>5</strong><span>questions d'examen</span></li>
+                            <li><strong>3 min</strong><span>environ</span></li>
+                            <li><strong>100 %</strong><span>corrigé et expliqué</span></li>
+                        </ul>
+                        <button class="bouton bouton--vert" type="button" data-test-commencer>Commencer le test</button>
+                        <p class="test__note">Sans inscription. Les planches sont celles de nos séries.</p>
+                    </div>
+
+                    <div class="test__jeu" data-test-jeu hidden>
+                        <div class="test__tete">
+                            <p class="test__compteur" data-test-compteur>Question 1 sur 5</p>
+                            <p class="test__points" data-test-points>0 bonne réponse</p>
+                        </div>
+                        <div class="test__progression" aria-hidden="true"><span data-test-barre></span></div>
+                        <div data-test-question></div>
+                    </div>
+
+                    <div class="test__fin" data-test-fin hidden>
+                        <div class="score" aria-hidden="true">
+                            <svg viewBox="0 0 120 120"><circle class="score__fond" cx="60" cy="60" r="52"/><circle class="score__arc" cx="60" cy="60" r="52" data-score-arc/></svg>
+                            <span data-score-texte>0/5</span>
+                        </div>
+                        <h3 data-fin-titre></h3>
+                        <p data-fin-message></p>
+                        <div class="test__actions">
+                            <a class="bouton bouton--vert" href="#contact">Je me pré-inscris</a>
+                            <a class="bouton bouton--contour" href="#" target="_blank" rel="noopener" data-test-partager>
+                                <svg class="icone" aria-hidden="true"><use href="#i-whatsapp"></use></svg>
+                                Défier un ami
+                            </a>
+                            <button class="bouton bouton--contour" type="button" data-test-rejouer>Refaire un test</button>
+                        </div>
+                    </div>
+
+                    <div class="test__erreur" data-test-erreur hidden>
+                        <p>Le test n'a pas pu se charger. Vérifiez votre connexion, puis réessayez.</p>
+                        <button class="bouton bouton--vert bouton--petit" type="button" data-test-commencer>Réessayer</button>
                     </div>
                 </div>
             </div>
@@ -566,6 +623,7 @@
                     <li><a href="index.html#formations">Formations</a></li>
                     <li><a href="index.html#categories">Catégories</a></li>
                     <li><a href="index.html#parcours">Parcours</a></li>
+                    <li><a href="index.html#test">Testez-vous</a></li>
                     <li><a href="index.html#faq">Questions fréquentes</a></li>
                     <li><a href="index.html#contact">Pré-inscription</a></li>
                 </ul>
@@ -620,6 +678,6 @@
         <symbol id="i-horloge" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M12 6.5V12l3.5 2"/></symbol>
     </svg>
 
-    <script src="script.js?v=4" defer></script>
+    <script src="script.js?v=5" defer></script>
 </body>
 </html>

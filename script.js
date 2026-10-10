@@ -278,6 +278,247 @@
         vignettes.forEach((v) => v.addEventListener('click', () => { window.location.href = v.dataset.grand; }));
     }
 
+    // ---------- Questions d'examen tirées de la base de l'application ----------
+    // Deux fonctions Supabase ouvertes aux visiteurs (migration
+    // 20261010200000_site_question_du_jour) ne lisent qu'une vitrine de 66
+    // questions sur 440. La clé ci-dessous est la clé publique du projet :
+    // elle est faite pour être dans un navigateur et ne donne accès qu'à ce
+    // que les règles de la base ouvrent aux anonymes.
+    const SUPABASE_RPC = 'https://ffmyvgiboejcqkhyzcis.supabase.co/rest/v1/rpc/';
+    const CLE_PUBLIQUE = 'sb_publishable_mZcrbOGtDYubpgR0fErEcA_hvGB5tNN';
+
+    function appeler(fonction) {
+        return fetch(SUPABASE_RPC + fonction, {
+            method: 'POST',
+            headers: { apikey: CLE_PUBLIQUE, 'Content-Type': 'application/json' },
+            body: '{}'
+        }).then((r) => {
+            if (!r.ok) throw new Error('HTTP ' + r.status);
+            return r.json();
+        });
+    }
+
+    function creer(balise, classe, texte) {
+        const el = document.createElement(balise);
+        if (classe) el.className = classe;
+        if (texte !== undefined) el.textContent = texte;
+        return el;
+    }
+
+    // Construit une question jouable. La correction suit la règle de
+    // l'examen : juste seulement si l'ensemble coché est exactement le bon.
+    function monterQuestion(q, options) {
+        const compacte = options.compacte === true;
+        const racine = creer('div', 'qcm' + (compacte ? ' qcm--compacte' : ''));
+
+        const figure = creer('figure', 'qcm__planche');
+        const img = creer('img');
+        img.src = q.image_url;
+        img.alt = 'Planche de la question ' + q.numero + ' de la série ' + q.serie;
+        img.decoding = 'async';
+        figure.appendChild(img);
+
+        const corps = creer('div', 'qcm__corps');
+        corps.appendChild(creer('p', 'qcm__enonce', q.enonce));
+        corps.appendChild(creer('p', 'qcm__consigne', q.multiple
+            ? 'Plusieurs réponses possibles : cochez toutes les bonnes.'
+            : 'Une seule bonne réponse.'));
+
+        const groupe = creer('div', 'qcm__reponses');
+        groupe.setAttribute('role', 'group');
+        groupe.setAttribute('aria-label', 'Réponses');
+        const valider = creer('button', 'bouton bouton--vert qcm__valider', 'Valider');
+        valider.type = 'button';
+        valider.disabled = true;
+
+        const choix = q.reponses.map((r) => {
+            const bouton = creer('button', 'qcm__choix');
+            bouton.type = 'button';
+            bouton.setAttribute('aria-pressed', 'false');
+            bouton.appendChild(creer('b', '', r.lettre));
+            bouton.appendChild(creer('span', '', r.texte));
+            bouton.addEventListener('click', () => {
+                const coche = bouton.getAttribute('aria-pressed') !== 'true';
+                if (!q.multiple) choix.forEach((c) => c.bouton.setAttribute('aria-pressed', 'false'));
+                bouton.setAttribute('aria-pressed', String(coche));
+                valider.disabled = !choix.some((c) => c.bouton.getAttribute('aria-pressed') === 'true');
+            });
+            groupe.appendChild(bouton);
+            return { bouton, juste: r.juste === true, lettre: r.lettre };
+        });
+        corps.appendChild(groupe);
+        corps.appendChild(valider);
+
+        const verdict = creer('div', 'qcm__verdict');
+        verdict.hidden = true;
+        verdict.setAttribute('aria-live', 'polite');
+        corps.appendChild(verdict);
+
+        valider.addEventListener('click', () => {
+            let juste = true;
+            choix.forEach((c) => {
+                const coche = c.bouton.getAttribute('aria-pressed') === 'true';
+                c.bouton.disabled = true;
+                if (coche !== c.juste) juste = false;
+                if (c.juste) c.bouton.classList.add('est-juste');
+                if (c.juste && !coche) c.bouton.classList.add('est-oubliee');
+                if (!c.juste && coche) c.bouton.classList.add('est-faux');
+            });
+            valider.hidden = true;
+
+            verdict.classList.toggle('est-faux', !juste);
+            verdict.appendChild(creer('strong', '', juste ? 'Bonne réponse !' : 'Ce n\'est pas tout à fait ça.'));
+            const bonnes = choix.filter((c) => c.juste).map((c) => c.lettre).join(', ');
+            verdict.appendChild(creer('p', '', (bonnes.indexOf(',') > 0 ? 'Bonnes réponses : ' : 'Bonne réponse : ') + bonnes));
+            if (q.explication) {
+                const details = creer('details');
+                details.appendChild(creer('summary', '', 'Comprendre la règle'));
+                const texte = creer('div', 'qcm__explication');
+                q.explication.split(/\n\s*\n/).forEach((para) => texte.appendChild(creer('p', '', para.trim())));
+                details.appendChild(texte);
+                if (!juste && !compacte) details.open = true;
+                verdict.appendChild(details);
+            }
+            verdict.hidden = false;
+            if (options.onReponse) options.onReponse(juste, corps);
+        });
+
+        racine.appendChild(figure);
+        racine.appendChild(corps);
+        return racine;
+    }
+
+    // La question du jour, dans le téléphone de la section Application.
+    // Si la base ne répond pas, la démonstration du sens interdit reste.
+    const zoneJour = document.querySelector('[data-question-jour]');
+    if (zoneJour && 'fetch' in window) {
+        const charger = () => appeler('site_question_du_jour').then((q) => {
+            if (!q || !q.reponses || !q.reponses.length) return;
+            zoneJour.replaceChildren(monterQuestion(q, {
+                compacte: true,
+                onReponse: (_, corps) => {
+                    const lien = creer('a', 'telephone__lien', 'Faire le mini-test de 5 questions →');
+                    lien.href = '#test';
+                    corps.appendChild(lien);
+                }
+            }));
+            const pastille = document.querySelector('[data-pastille]');
+            if (pastille) pastille.textContent = 'Question du jour';
+        }).catch(() => {});
+        // Chargée à l'approche de la section, pas au premier affichage
+        if ('IntersectionObserver' in window) {
+            const obs = new IntersectionObserver((entrees) => {
+                if (entrees.some((e) => e.isIntersecting)) { obs.disconnect(); charger(); }
+            }, { rootMargin: '600px 0px' });
+            obs.observe(zoneJour);
+        } else {
+            charger();
+        }
+    }
+
+    // Le mini-test de 5 questions
+    const test = document.querySelector('[data-test]');
+    if (test) {
+        const ecrans = {
+            accueil: test.querySelector('[data-test-accueil]'),
+            jeu: test.querySelector('[data-test-jeu]'),
+            fin: test.querySelector('[data-test-fin]'),
+            erreur: test.querySelector('[data-test-erreur]')
+        };
+        const zoneQuestion = test.querySelector('[data-test-question]');
+        const compteur = test.querySelector('[data-test-compteur]');
+        const points = test.querySelector('[data-test-points]');
+        const barre = test.querySelector('[data-test-barre]');
+        const boutonsCommencer = test.querySelectorAll('[data-test-commencer]');
+        let questions = [];
+        let index = 0;
+        let bonnes = 0;
+
+        const montrer = (nom) => Object.keys(ecrans).forEach((k) => { ecrans[k].hidden = k !== nom; });
+        const ramener = () => {
+            const haut = test.getBoundingClientRect().top;
+            if (haut < 70 || haut > window.innerHeight * 0.5) {
+                test.scrollIntoView({ behavior: reduireMouvement ? 'auto' : 'smooth', block: 'start' });
+            }
+        };
+        const textePoints = () => bonnes + (bonnes > 1 ? ' bonnes réponses' : ' bonne réponse');
+
+        function afficherQuestion() {
+            const q = questions[index];
+            compteur.textContent = 'Question ' + (index + 1) + ' sur ' + questions.length;
+            points.textContent = textePoints();
+            barre.style.width = (index / questions.length * 100) + '%';
+            zoneQuestion.replaceChildren(monterQuestion(q, {
+                onReponse: (juste, corps) => {
+                    if (juste) bonnes += 1;
+                    points.textContent = textePoints();
+                    barre.style.width = ((index + 1) / questions.length * 100) + '%';
+                    const derniere = index === questions.length - 1;
+                    const suite = creer('button', 'bouton bouton--or qcm__suite', derniere ? 'Voir mon résultat' : 'Question suivante');
+                    suite.type = 'button';
+                    suite.addEventListener('click', () => {
+                        if (derniere) { terminer(); } else { index += 1; afficherQuestion(); }
+                        ramener();
+                    });
+                    corps.appendChild(suite);
+                    suite.focus({ preventScroll: true });
+                }
+            }));
+        }
+
+        function terminer() {
+            const total = questions.length;
+            const score = test.querySelector('.score');
+            const arc = test.querySelector('[data-score-arc]');
+            test.querySelector('[data-score-texte]').textContent = bonnes + '/' + total;
+            score.classList.toggle('est-reussi', bonnes >= total - 1);
+            arc.style.strokeDashoffset = '326.7';
+            let titre;
+            let message;
+            if (bonnes === total) {
+                titre = 'Parfait, ' + bonnes + ' sur ' + total + ' !';
+                message = 'Vous avez l\'œil. Inscrivez-vous pour vous entraîner sur les 440 questions de nos séries et passer l\'examen avec nous.';
+            } else if (bonnes >= total - 1) {
+                titre = 'Très bien, ' + bonnes + ' sur ' + total;
+                message = 'À l\'examen, il faut au moins 25 bonnes réponses sur 30. Avec nos cours et l\'application, vous y serez vite.';
+            } else if (bonnes >= 2) {
+                titre = bonnes + ' sur ' + total + ' : encore un effort';
+                message = 'Les questions à plusieurs réponses piègent beaucoup de candidats. Nos moniteurs et l\'application vous apprennent à les lire.';
+            } else {
+                titre = bonnes + ' sur ' + total + ' : le code, ça s\'apprend';
+                message = 'C\'est normal au début. Nos cours en salle et l\'application, avec ses corrections expliquées, sont faits pour ça.';
+            }
+            test.querySelector('[data-fin-titre]').textContent = titre;
+            test.querySelector('[data-fin-message]').textContent = message;
+            const partage = 'J\'ai eu ' + bonnes + '/' + total + ' au test du code de la route d\'Ange Auto-École. À toi de jouer : https://www.angeautoecole.com/#test';
+            test.querySelector('[data-test-partager]').href = 'https://wa.me/?text=' + encodeURIComponent(partage);
+            montrer('fin');
+            requestAnimationFrame(() => requestAnimationFrame(() => {
+                arc.style.strokeDashoffset = String(326.7 * (1 - bonnes / total));
+            }));
+        }
+
+        function commencer() {
+            boutonsCommencer.forEach((b) => { b.disabled = true; b.dataset.texte = b.dataset.texte || b.textContent; b.textContent = 'Chargement…'; });
+            appeler('site_mini_test').then((liste) => {
+                questions = (liste || []).filter((q) => q && q.reponses && q.reponses.length);
+                if (!questions.length) throw new Error('vide');
+                index = 0;
+                bonnes = 0;
+                montrer('jeu');
+                afficherQuestion();
+                ramener();
+            }).catch(() => {
+                montrer('erreur');
+            }).finally(() => {
+                boutonsCommencer.forEach((b) => { b.disabled = false; b.textContent = b.dataset.texte; });
+            });
+        }
+
+        boutonsCommencer.forEach((b) => b.addEventListener('click', commencer));
+        test.querySelector('[data-test-rejouer]').addEventListener('click', commencer);
+    }
+
     // ---------- Formulaire de pré-inscription ----------
     // L'envoi est traité par Netlify Forms (data-netlify), qui redirige vers merci.html.
     const formulaire = document.querySelector('.formulaire');
