@@ -7,7 +7,7 @@
 // ci-dessous + CACHE_NAME) à chaque mise en ligne qui les modifie, sinon une
 // page neuve tournerait avec un style ancien.
 
-const CACHE_NAME = 'ange-auto-ecole-v7';
+const CACHE_NAME = 'ange-auto-ecole-v8';
 const APP_SHELL = [
     '/',
     '/index.html',
@@ -20,8 +20,10 @@ const APP_SHELL = [
     '/assets/marque/embleme_aile_haut.webp',
     '/assets/marque/embleme_aile_bas.webp',
     '/assets/video/accueil-camion.webp',
-    '/assets/icons/icon-192.png',
-    '/assets/icons/icon-512.png'
+    '/favicon.ico',
+    '/assets/icons/roue-32.png',
+    '/assets/icons/roue-192.png',
+    '/assets/icons/roue-512.png'
 ];
 
 self.addEventListener('install', (event) => {
