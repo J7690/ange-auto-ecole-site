@@ -353,6 +353,45 @@ button { font: inherit; color: inherit; }
 .surtitre::before { content: ''; width: 26px; height: 3px; border-radius: 2px; background: var(--rouge); }
 .surtitre--or { color: var(--or); }
 
+/* ---------- Promotions en cours (cachées s'il n'y en a pas) ---------- */
+.section--promos {
+    background:
+        radial-gradient(70% 90% at 100% 0%, rgba(245, 178, 60, .18), transparent 60%),
+        var(--sombre);
+    color: var(--creme);
+}
+.section--promos[hidden] { display: none; }
+.section--promos h2 { color: #fff; }
+.promos { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.25rem; max-width: 1040px; margin: 0 auto; }
+.promo {
+    display: grid; grid-template-columns: auto 1fr; border-radius: var(--rayon-grand); overflow: hidden;
+    background: rgba(255, 255, 255, .05); border: 1px solid rgba(245, 178, 60, .35);
+    animation: apparition-panneau .6s var(--courbe) both; animation-delay: calc(var(--i, 0) * 120ms);
+    transition: transform .3s var(--courbe), border-color .3s;
+}
+.promo:hover { transform: translateY(-4px); border-color: var(--or); }
+.promo__remise {
+    display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 1.2rem .8rem; width: 136px; position: relative;
+    background: var(--or); color: var(--encre); font-family: var(--police-titre); font-weight: 800;
+    font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem); line-height: 1.05; text-align: center;
+}
+/* La découpe du ticket */
+.promo__remise::after {
+    content: ''; position: absolute; right: -7px; top: 0; bottom: 0; width: 14px;
+    background: radial-gradient(circle at 7px 10px, var(--sombre) 6px, transparent 6.5px) 0 0 / 14px 20px repeat-y;
+}
+.promo__remise small { display: block; font-size: .42em; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; margin-top: .2rem; }
+.promo__corps { padding: 1.2rem 1.3rem 1.3rem 1.6rem; }
+.promo__corps h3 { color: #fff; margin-bottom: .2rem; }
+.promo__categorie { color: var(--or); font-weight: 700; margin: 0 0 .6rem; }
+.promo__infos { list-style: none; margin: 0 0 1rem; padding: 0; color: rgba(245, 239, 226, .8); font-size: .95rem; display: grid; gap: .2rem; }
+.promo__urgent { color: #ffd27a; font-weight: 700; }
+@media (max-width: 420px) {
+    .promo { grid-template-columns: 1fr; }
+    .promo__remise { padding: .9rem; }
+    .promo__remise::after { display: none; }
+}
+
 /* ---------- Formations ---------- */
 .offres { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
 .offre {

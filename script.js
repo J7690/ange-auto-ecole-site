@@ -519,6 +519,72 @@
         test.querySelector('[data-test-rejouer]').addEventListener('click', commencer);
     }
 
+    // ---------- Promotions en cours ----------
+    // Saisies par l'administration dans l'application (onglet Promotions de
+    // l'inscription). Le site n'affiche que la remise, jamais le prix ; la
+    // section reste cachée tant qu'aucune promotion publique n'est en cours.
+    const sectionPromos = document.querySelector('[data-promotions]');
+
+    function afficherPromotions(promos) {
+        if (!sectionPromos || !Array.isArray(promos) || !promos.length) return;
+        const liste = sectionPromos.querySelector('[data-promos-liste]');
+        const nombre = new Intl.NumberFormat('fr-FR');
+        liste.replaceChildren();
+        promos.forEach((p, i) => {
+            const carte = creer('article', 'promo');
+            carte.style.setProperty('--i', i);
+
+            const remise = creer('div', 'promo__remise');
+            remise.textContent = p.reduction_type === 'pourcentage'
+                ? '−' + nombre.format(p.reduction_valeur) + ' %'
+                : '−' + nombre.format(p.reduction_valeur) + ' F';
+            remise.appendChild(creer('small', '', 'de remise'));
+
+            const corps = creer('div', 'promo__corps');
+            corps.appendChild(creer('h3', '', p.libelle));
+            if (p.categorie) corps.appendChild(creer('p', 'promo__categorie', 'Permis ' + p.categorie));
+
+            const infos = creer('ul', 'promo__infos');
+            if (p.fin_le) {
+                const fin = new Date(p.fin_le);
+                const jours = Math.ceil((fin - Date.now()) / 86400000);
+                const date = fin.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' });
+                const li = creer('li', jours <= 3 ? 'promo__urgent' : '',
+                    jours <= 1 ? 'Dernier jour : jusqu\'au ' + date : 'Jusqu\'au ' + date + ' · encore ' + jours + ' jours');
+                infos.appendChild(li);
+            } else {
+                infos.appendChild(creer('li', '', 'Offre en cours'));
+            }
+            if (p.places_restantes !== null && p.places_restantes !== undefined) {
+                const n = p.places_restantes;
+                infos.appendChild(creer('li', n <= 5 ? 'promo__urgent' : '',
+                    n > 1 ? 'Plus que ' + n + ' places' : 'Dernière place'));
+            }
+            corps.appendChild(infos);
+
+            const lien = creer('a', 'bouton bouton--or bouton--petit', 'J\'en profite');
+            lien.href = '#contact';
+            lien.addEventListener('click', () => {
+                const categorie = document.getElementById('categorie');
+                if (categorie && p.categorie && [...categorie.options].some((o) => o.value === p.categorie)) {
+                    categorie.value = p.categorie;
+                }
+                const message = document.getElementById('message');
+                if (message && !message.value) message.value = 'Je souhaite profiter de la promotion « ' + p.libelle + ' ».';
+            });
+            corps.appendChild(lien);
+
+            carte.appendChild(remise);
+            carte.appendChild(corps);
+            liste.appendChild(carte);
+        });
+        sectionPromos.hidden = false;
+    }
+
+    if (sectionPromos && 'fetch' in window) {
+        appeler('site_promotions_actives').then(afficherPromotions).catch(() => {});
+    }
+
     // ---------- Formulaire de pré-inscription ----------
     // L'envoi est traité par Netlify Forms (data-netlify), qui redirige vers merci.html.
     const formulaire = document.querySelector('.formulaire');
