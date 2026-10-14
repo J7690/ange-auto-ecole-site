@@ -7,7 +7,7 @@
 // ci-dessous + CACHE_NAME) à chaque mise en ligne qui les modifie, sinon une
 // page neuve tournerait avec un style ancien.
 
-const CACHE_NAME = 'ange-auto-ecole-v8';
+const CACHE_NAME = 'ange-auto-ecole-v9';
 const APP_SHELL = [
     '/',
     '/index.html',
