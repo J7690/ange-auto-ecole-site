@@ -650,6 +650,10 @@ button { font: inherit; color: inherit; }
 /* ---------- Contact ---------- */
 .contact { display: grid; grid-template-columns: 1fr 1.05fr; gap: clamp(1.5rem, 1rem + 2vw, 3rem); align-items: start; }
 .contact__raccourcis { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; }
+.contact__inscription { background: var(--blanc, #fff); border: 2px solid currentColor; border-color: rgba(0, 0, 0, .08); border-radius: 18px; padding: 1.2rem 1.3rem; margin-bottom: 1rem; }
+.contact__inscription h3 { margin: 0 0 .4rem; font-size: 1.15rem; }
+.contact__inscription p { margin: 0 0 .9rem; }
+.contact__inscription-actions { display: flex; flex-wrap: wrap; gap: .6rem; }
 .raccourci {
     display: flex; align-items: center; gap: .8rem; padding: .95rem 1rem; border-radius: var(--rayon);
     background: var(--surface); border: 1px solid var(--trait); color: var(--texte); text-decoration: none;

@@ -585,13 +585,43 @@
         appeler('site_promotions_actives').then(afficherPromotions).catch(() => {});
     }
 
-    // ---------- Formulaire de pré-inscription ----------
-    // L'envoi est traité par Netlify Forms (data-netlify), qui redirige vers merci.html.
+    // ---------- Formulaire « Être rappelé » ----------
+    // 1) La demande entre dans le suivi des prospects de l'application
+    //    (fonction site_pre_inscription, migration 20261122140000) ;
+    // 2) puis l'envoi Netlify Forms part comme avant (copie de secours) et
+    //    redirige vers merci.html. Si la base ne répond pas en 5 s, Netlify
+    //    part quand même : aucune demande n'est perdue.
     const formulaire = document.querySelector('.formulaire');
     if (formulaire) {
-        formulaire.addEventListener('submit', () => {
+        let envoye = false;
+        formulaire.addEventListener('submit', (e) => {
+            if (envoye) return;
+            e.preventDefault();
             const bouton = formulaire.querySelector('button[type="submit"]');
             if (bouton) { bouton.disabled = true; bouton.textContent = 'Envoi en cours…'; }
+            const d = new FormData(formulaire);
+            if (d.get('bot-field')) return;
+            const corps = {
+                p_nom: d.get('nom') || '',
+                p_telephone: d.get('telephone') || '',
+                p_whatsapp: d.get('whatsapp') || null,
+                p_email: d.get('email') || null,
+                p_categorie: d.get('categorie') || null,
+                p_disponibilite: d.get('disponibilite') || null,
+                p_message: d.get('message') || null
+            };
+            const continuer = () => {
+                if (envoye) return;
+                envoye = true;
+                formulaire.submit();
+            };
+            const minuterie = setTimeout(continuer, 5000);
+            fetch(SUPABASE_RPC + 'site_pre_inscription', {
+                method: 'POST',
+                headers: { apikey: CLE_PUBLIQUE, 'Content-Type': 'application/json' },
+                body: JSON.stringify(corps),
+                keepalive: true
+            }).catch(() => {}).finally(() => { clearTimeout(minuterie); continuer(); });
         });
     }
 
